@@ -15,7 +15,7 @@ for budget in range(9, 18):
         ax.scatter(budget, candidates[0].contribution, color="#226b5b", s=65, zorder=3)
 baseline = ranked_rosters()[0]
 ax.annotate(f"Budget 14: score {baseline.contribution}", (14, baseline.contribution),
-            xytext=(9.4, baseline.contribution + 5), arrowprops={"arrowstyle": "->", "color": "#304741"})
+            xytext=(11, baseline.contribution + 5), arrowprops={"arrowstyle": "->", "color": "#304741"})
 ax.set(title="Roster choice under a fixed risk ceiling", xlabel="Budget (synthetic units)",
        ylabel="Best feasible contribution")
 ax.set_ylim(35, 66)
