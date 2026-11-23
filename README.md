@@ -1,38 +1,58 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/cover-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="docs/cover-light.svg">
-  <img src="docs/cover-light.svg" alt="Project overview" width="1280">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/cover-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="docs/cover-light.svg" />
+  <img src="docs/cover-light.svg" alt="Sports Franchise Optimization" width="1280" />
 </picture>
 
 # Sports Franchise Optimization
 
-A reproducible roster selection example that shows how a budget, role requirements, and a risk ceiling constrain player acquisition.
+Find the best feasible roster for a given budget, role mix, and risk limit.
 
-![Best feasible contribution by budget under a fixed risk ceiling for fictional candidates](docs/roster-tradeoff.png)
+[▶ Demo](#demo) · [中文](README.zh.md) · [![CI](https://github.com/Daniel-24-life/sports-franchise-optimization/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Daniel-24-life/sports-franchise-optimization/actions/workflows/ci.yml) · [MIT](LICENSE) · Python 3.11+
 
-## Approach
+## Demo
 
-- Select one guard, one wing, and one post from a small fictional roster pool.
-- Add the candidates' costs and risk scores, reject infeasible rosters, and rank the rest by additive contribution.
-- Compare the best feasible value across budgets. The solver enumerates combinations exactly for the included small pool.
+<img src="docs/roster-tradeoff.png" alt="Sports Franchise Optimization" width="800" />
 
-**Stack** · Python standard library for optimization and tests. Matplotlib for the chart.
+## Problem
 
-## Layout
+The highest-ranked player can be a poor fit when the roster still needs a role covered. An exact small-scale search makes the constraint trade-offs visible.
 
-- [optimizer.py](optimizer.py) contains the fixture and solver.
-- [test_optimizer.py](test_optimizer.py) checks ranking and constraints.
-- [render_chart.py](render_chart.py) redraws the public chart.
+## What I built
 
-## Run locally
+- Enumerate candidate rosters without discarding feasible combinations.
+- Apply budget, role and risk checks before ranking.
+- Plot the best feasible score across budgets.
+
+## How it works
+
+```mermaid
+flowchart LR
+    A["Candidate roster"] --> B["Constraints"] --> C["Ranked choice"]
+```
+
+## Run in 60 seconds
 
 ```sh
 python optimizer.py
-python -m unittest -v
 python -m pip install matplotlib
 python render_chart.py
 ```
 
-## Scope and limits
+## Tests
 
-This is an independently prepared synthetic example of one team modeling project's roster-portfolio idea. The original paper also treats franchise dynamics, pricing, and expansion. This demo omits those models and uses no original datasets or athlete records. Exhaustive enumeration is practical for the small pool here. Its results describe fictional inputs and carry no real player or franchise recommendation.
+**3 tests passed.** [Verified GitHub Actions run](https://github.com/Daniel-24-life/sports-franchise-optimization/actions/runs/45105908472).
+
+```sh
+python -m unittest -v
+```
+
+## Repository layout
+
+| Path | Contents |
+| --- | --- |
+| [`optimizer.py`](optimizer.py) | Candidate fixture and exact solver |
+| [`test_optimizer.py`](test_optimizer.py) | Feasibility and ranking tests |
+| [`render_chart.py`](render_chart.py) | Budget trade-off chart |
+
+<sub>The example uses synthetic roster inputs. Enumeration is exact for the included candidate set and its scoring assumptions.</sub>
