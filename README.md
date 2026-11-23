@@ -1,3 +1,9 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/cover-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/cover-light.svg">
+  <img src="docs/cover-light.svg" alt="Project overview" width="1280">
+</picture>
+
 # Sports Franchise Optimization
 
 A reproducible roster selection example that shows how a budget, role requirements, and a risk ceiling constrain player acquisition.
